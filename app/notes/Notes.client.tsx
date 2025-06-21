@@ -7,17 +7,24 @@ import NoteList from '@/components/NoteList/NoteList';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes, GetNotesRes } from '@/lib/api';
 
-const NotesClient = () => {
-  const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
+interface NotesClientProps {
+  initialData: GetNotesRes;
+  initialSearch: string;
+  initialPage: number;
+}
+
+const NotesClient = ({ initialData, initialSearch, initialPage}: NotesClientProps) => {
+  const [search, setSearch] = useState(initialSearch);
+  const [page, setPage] = useState(initialPage);
   const [isOpen, setIsOpen] = useState(false);
   const [debouncedSearch] = useDebounce(search, 300);
 
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ['note', debouncedSearch, page],
-    queryFn: () => fetchNotes(debouncedSearch, page),
+      queryFn: () => fetchNotes(debouncedSearch, page),
+      initialData,
     placeholderData: keepPreviousData,
   });
 
@@ -46,7 +53,7 @@ const NotesClient = () => {
         }
       </header>
       {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isOpen && <NoteModal onClose={closeModal} isLoading={isLoading} />}
+      {isOpen && <NoteModal onClose={closeModal}/>}
     </>
   );
 };

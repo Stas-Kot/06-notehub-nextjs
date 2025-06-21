@@ -26,11 +26,11 @@ const NoteDetailsClient = () => {
         <div className={css.container}>
           <div className={css.item}>
             <div className={css.header}>
-              <h2>{note.data.title}</h2>
-              <button className={css.editBtn}>Edit note</button>
+              <h2>{note.title}</h2>
+              <button className={css.editBtn} disabled>Edit note</button>
             </div>
-            <p className={css.content}>{note.data.content}</p>
-            <p className={css.date}>{note.data.createdAt}</p>
+            <p className={css.content}>{note.content}</p>
+            <p className={css.date}>{note.createdAt}</p>
           </div>
         </div>
       )}

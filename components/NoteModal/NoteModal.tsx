@@ -5,7 +5,6 @@ import NoteForm from "../NoteForm/NoteForm";
 
 interface NoteModalProps {
   onClose: () => void;
-  isLoading: boolean;
 }
 
 export default function NoteModal({ onClose }: NoteModalProps) {

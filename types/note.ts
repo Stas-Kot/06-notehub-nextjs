@@ -2,8 +2,9 @@ export interface Note {
   id: number;
   title: string;
   content: string;
-  tag: Tag;
   createdAt: string;
+  updatedAt: string;
+  tag: Tag;
 }
 
 export interface NewNote {

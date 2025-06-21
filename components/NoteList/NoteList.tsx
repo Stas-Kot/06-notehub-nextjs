@@ -22,7 +22,7 @@ export default function NoteList({ notes }: NoteListProps) {
       setLoadingNoteId(id);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['note'] });
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
       setLoadingNoteId(null);
     },
     onError: () => {
@@ -33,6 +33,7 @@ export default function NoteList({ notes }: NoteListProps) {
 
   return (
     <ul className={css.list}>
+      {notes.length === 0 && <p className={css.text}>There are no notes yet, so let&apos;s start notating.</p>}
       {notes.map(note => (
         <li key={note.id} className={css.listItem}>
           <h2 className={css.title}>{note.title}</h2>
