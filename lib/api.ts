@@ -6,7 +6,7 @@ export interface GetNotesRes {
   totalPages: number;
 }
 
-axios.defaults.baseURL = 'https://note23hub-public.goit.study/api';
+axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 const PER_PAGE = 12;
 
 const fetchNotes = async (search: string, page: number): Promise<GetNotesRes> => {
